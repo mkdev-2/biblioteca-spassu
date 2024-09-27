@@ -1,0 +1,68 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - test-workflow
+  pull_request:
+    branches:
+      - main
+      - test-workflow
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:5.7
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_DATABASE: biblioteca
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3 
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer, phpunit 
+          extensions: mbstring, pdo, pdo_mysql
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest 
+
+      - name: Install dockerize
+        run: |
+          curl -sSL https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz | tar -C /usr/local/bin -xzv
+
+      - name: Wait for MySQL
+        run: |
+          dockerize -wait tcp://localhost:3306 -timeout 3m
+
+      - name: Create databases
+        run: php artisan db:create
+
+      - name: Run migrations for application
+        run: php artisan migrate --force
+
+      - name: Run migrations for testing
+        run: php artisan migrate --force --env=testing
+
+      - name: Seed database (optional)
+        run: php artisan db:seed --force
+
+      - name: Create .env file
+        run: cp .env.example .env
+
+      - name: Generate application key
+        run: php artisan key:generate --ansi
+
+      - name: Run tests
+        run: php artisan test

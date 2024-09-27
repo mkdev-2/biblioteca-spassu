@@ -1,0 +1,39 @@
+# Ignore diretórios do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Diretórios de dependências
+/vendor
+/node_modules
+
+# Arquivos de ambiente e configuração sensíveis
+.env
+.env.testing
+
+# Cache, logs e diretórios temporários
+/storage/logs
+/storage/framework/cache
+/storage/framework/sessions
+/storage/framework/testing
+/storage/framework/views
+
+# Cache do Composer
+composer.lock
+
+# Cache de build e assets gerados
+/public/storage
+/public/hot
+/public/mix-manifest.json
+
+# Cache de build do frontend
+/npm-debug.log*
+/yarn-error.log*
+
+# Outras pastas de cache e arquivos temporários
+.idea
+.vscode
+.phpunit.result.cache
+.php_cs.cache
+
+# Arquivos de build do Docker (caso não sejam essenciais para desenvolvimento)
+docker-compose.override.yml

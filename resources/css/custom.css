@@ -1,0 +1,200 @@
+/* Cores personalizadas baseadas na Spassu */
+:root {
+    --primary-color: #0054A6; /* Azul principal */
+    --secondary-color: #F48221; /* Laranja */
+    --accent-color: #17A2B8; /* Azul claro (informação) */
+    --text-color: #4A4A4A; /* Cinza escuro */
+    --muted-color: #F5F5F5; /* Fundo neutro */
+    --background-color: #FFFFFF; /* Fundo branco */
+    --border-color: #DEE2E6; /* Cor de borda neutra */
+}
+
+/* Fonte personalizada e ajustes tipográficos */
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+/* Contêiner */
+.container {
+    max-width: 900px;
+}
+
+/* Navbar personalizada */
+.navbar {
+    background-color: var(--primary-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand, .nav-link {
+    color: white !important;
+    font-weight: 600;
+}
+
+.nav-link:hover {
+    color: var(--secondary-color) !important;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+/* Estilo de botões */
+.btn, .btn-primary, .btn-success, .btn-warning, .btn-danger {
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.btn:hover, .btn-primary:hover, .btn-success:hover, .btn-warning:hover, .btn-danger:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #004080;
+    border-color: #004080;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #d96e1c;
+    border-color: #d96e1c;
+}
+
+/* Estilo para formulário */
+.form-label {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.form-control {
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 5px rgba(244, 130, 33, 0.5);
+}
+
+/* Estilos dos Cards */
+.card {
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-body p {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-color);
+}
+
+.card-body p strong {
+    color: var(--primary-color);
+}
+
+/* Ícones */
+.card .icon i, i.bi {
+    font-size: 1.5rem;
+    color: var(--muted-color);
+    transition: color 0.2s ease-in-out;
+}
+
+i.bi:hover {
+    color: var(--secondary-color);
+}
+
+/* Links */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+
+a:hover {
+    color: var(--secondary-color);
+}
+
+/* Alertas estilizados */
+.alert {
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+/* Ajustes de espaçamento */
+.mt-3 {
+    margin-top: 1.5rem;
+}
+
+.mb-3 {
+    margin-bottom: 1.5rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+    .nav-link {
+        font-size: 0.9rem;
+    }
+}
+
+/* Sombra leve para os cards */
+.card-shadow {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Estilo para os toasts */
+.toast-container .toast {
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-index{
+    padding: 4px 9px;
+}
+
+.btn-index > i.bi {
+    font-size: 1rem;
+}
+
