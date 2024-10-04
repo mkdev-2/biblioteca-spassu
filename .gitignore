@@ -1,4 +1,4 @@
-# Ignore diretórios do sistema operacional
+# Ignore arquivos de sistema operacional
 .DS_Store
 Thumbs.db
 
@@ -33,7 +33,16 @@ composer.lock
 .idea
 .vscode
 .phpunit.result.cache
+.phpunit.cache
 .php_cs.cache
+.phpunit.xml.bak
+
+# Arquivos de backup e temporários
+coverage/
 
 # Arquivos de build do Docker (caso não sejam essenciais para desenvolvimento)
 docker-compose.override.yml
+
+# Cache de IDEs e ferramentas de desenvolvimento
+*.bak
+*.swp

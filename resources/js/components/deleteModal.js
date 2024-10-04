@@ -6,8 +6,15 @@ export function openDeleteModal(actionUrl) {
     deleteModal.show();
 }
 
-export function showToast() {
+export function showToast(message = 'Exclusão realizada com sucesso!') {
     const toastElement = document.getElementById('successToast');
+    const toastBody = toastElement.querySelector('.toast-body');
+    
+    // Atualiza a mensagem do toast se fornecida
+    if (toastBody && message) {
+        toastBody.textContent = message;
+    }
+
     const toast = new bootstrap.Toast(toastElement);
     toast.show();
 }
@@ -17,6 +24,7 @@ window.showToast = showToast;
 
 document.addEventListener('DOMContentLoaded', function() {
     const deleteConfirmBtn = document.getElementById('deleteConfirmBtn');
+
     if (deleteConfirmBtn) {
         deleteConfirmBtn.addEventListener('click', function() {
             if (!deleteUrl) {
@@ -31,10 +39,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .then(response => {
-                if (!response.ok) {
-                    throw new Error('Erro ao excluir o item.');
-                }
-                return response.json();
+                return response.json().then(data => {
+                    if (!response.ok) {
+                        throw new Error(data.error || 'Erro ao excluir o item.');
+                    }
+                    return data;
+                });
             })
             .then(data => {
                 if (data.success) {
@@ -45,12 +55,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     showToast(); 
                     setTimeout(() => location.reload(), 2000); 
                 } else {
-                    console.error('Erro ao excluir o item:', data.error);
+                    location.reload();
                 }
             })
             .catch(error => {
                 console.error('Erro:', error);
-                alert('Ocorreu um erro ao tentar excluir o item. Por favor, tente novamente.');
+                location.reload();
             });
         });
     }

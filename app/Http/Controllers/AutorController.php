@@ -9,10 +9,13 @@ use Illuminate\Database\QueryException;
 
 class AutorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $autores = Autor::simplePaginate(10);
-        return view('autores.index', compact('autores'));
+        $search = $request->input('search');
+        $autores = Autor::when($search, function ($query, $search) {
+            return $query->where('Nome', 'like', '%' . $search . '%');
+        })->simplePaginate(10);
+        return view('autores.index', compact('autores', 'search'));
     }
 
     public function create()
@@ -20,11 +23,16 @@ class AutorController extends Controller
         return view('autores.form');
     }
 
-    public function store(AutorRequest $request)
-    {
-        $this->validateAutor($request);
 
-        Autor::create($request->all());
+    public function show(Autor $autor)
+    {
+        $livros = $autor->livros;
+        return view('autores.show', compact('autor', 'livros'));
+    }
+
+    public function store(AutorRequest $request, Autor $autor)
+    {
+        $autor->create($request->validated());
         return redirect()->route('autores.index')->with('success', 'Autor criado com sucesso.');
     }
 
@@ -35,26 +43,20 @@ class AutorController extends Controller
     
     public function update(AutorRequest $request, Autor $autor)
     {
-        $this->validateAutor($request);
-
-        $autor->update($request->all());
+        $autor->update($request->validated());
         return redirect()->route('autores.index')->with('success', 'Autor atualizado com sucesso.');
     }
 
     public function destroy(Autor $autor)
     {
-        try {
-            $autor->delete();
-            return response()->json(['success' => true]);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+        if ($autor->livros()->exists()) {
+            return redirect()->route('autores.index')->with('error', 'Não é possível excluir um autor vinculado a um ou mais livros.');
         }
-    }
 
-    private function validateAutor(Request $request)
-    {
-        $request->validate([
-            'Nome' => 'required|max:40'
-        ]);
+        $autor->delete();
+        
+        return redirect()->route('autores.index')
+        ->with('success', 'Autor excluído com sucesso!');
     }
+    
 }

@@ -31,7 +31,7 @@ class LivroService
     public function createLivro(array $data)
     {
         $livro = Livro::create($data);
-        
+
         if (isset($data['autores'])) {
             $livro->autores()->attach($data['autores']);
         }
@@ -49,13 +49,11 @@ class LivroService
      * @param array $data
      * @return Livro
      */
+
     public function updateLivro(int $CodLi, array $data)
     {
         $livro = $this->findLivroById($CodLi);
         $livro->update($data);
-        
-        $livro->autores()->detach();
-        $livro->assuntos()->detach();
 
         if (isset($data['autores'])) {
             $livro->autores()->sync($data['autores']);
@@ -64,16 +62,23 @@ class LivroService
         if (isset($data['assuntos'])) {
             $livro->assuntos()->sync($data['assuntos']);
         }
-
+        
         return $livro;
     }
-
+     
     public function deleteLivro($CodLi)
     {
-        $livro = Livro::findOrFail($CodLi);
+        $livro = Livro::with(['autores', 'assuntos'])->findOrFail($CodLi);
+        
+        if ($livro->autores()->exists()) {
+            $livro->autores()->detach();
+        }
+    
+        if ($livro->assuntos()->exists()) {
+            $livro->assuntos()->detach();
+        }
         $livro->delete();
     }
-
 
 
 }

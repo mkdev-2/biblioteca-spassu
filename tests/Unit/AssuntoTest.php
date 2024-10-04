@@ -6,12 +6,13 @@ use Tests\TestCase;
 use App\Models\Assunto;
 use App\Models\Livro;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 
 class AssuntoTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function um_assunto_pode_ser_criado()
     {
         $assunto = Assunto::create([
@@ -23,7 +24,7 @@ class AssuntoTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function um_assunto_pode_ser_associado_a_um_livro()
     {
         $assunto = Assunto::factory()->create();

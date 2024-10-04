@@ -6,12 +6,13 @@ use Tests\TestCase;
 use App\Models\Autor;
 use App\Models\Livro;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 
 class AutorTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function um_autor_pode_ser_criado()
     {
         $autor = Autor::create([
@@ -23,7 +24,7 @@ class AutorTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function um_autor_pode_ser_associado_a_um_livro()
     {
         $autor = Autor::factory()->create(); 

@@ -17,9 +17,7 @@
             <form action="{{ route('autores.index') }}" method="GET" class="mb-4">
                 <div class="input-group">
                     <input type="text" name="search" class="form-control" placeholder="Buscar por nome" value="{{ request('search') }}">
-                    <button class="btn btn-outline-secondary" type="submit">
-                        <i class="bi bi-search"></i> Buscar
-                    </button>
+                    <button class="btn btn-outline-secondary" type="submit">Buscar</button>
                 </div>
             </form>
 
@@ -34,7 +32,7 @@
                     </div>
                 @endif
             @else
-                <table class="table table-striped">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th style="width: 85%;">Nome</th>

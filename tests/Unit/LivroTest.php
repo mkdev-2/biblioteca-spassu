@@ -7,12 +7,13 @@ use App\Models\Livro;
 use App\Models\Assunto;
 use App\Models\Autor;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\Test;
 
 class LivroTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function um_livro_pode_ser_criado()
     {
         $livro = Livro::create([
@@ -28,7 +29,7 @@ class LivroTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function um_livro_pode_ter_autores_e_assuntos_associados()
     {
         $autor = Autor::factory()->create(); 

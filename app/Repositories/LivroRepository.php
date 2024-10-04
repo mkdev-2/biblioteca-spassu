@@ -14,4 +14,9 @@ class LivroRepository
                     })
                     ->simplePaginate(10);
     }
+
+    public function findById($id)
+    {
+        return Livro::with(['autores:CodAu,Nome', 'assuntos:CodAs,Descricao'])->findOrFail($id);
+    }
 }

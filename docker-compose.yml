@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/var/www
+    ports:
+      - "8000:8000"
+    networks:
+      - laravel
+    command: sh -c "cp .env.example .env && cp .env.example .env.testing && sed -i 's/DB_HOST=.*/DB_HOST=mysql/' .env && sed -i 's/DB_HOST=.*/DB_HOST=mysql/' .env.testing && php artisan key:generate && php artisan db:create && php artisan migrate --env=testing && php artisan serve --host=0.0.0.0 --port=8000"
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: biblioteca
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    networks:
+      - laravel
+
+networks:
+  laravel:
+    driver: bridge

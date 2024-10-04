@@ -14,12 +14,10 @@
             </a>
         </div>
         <div class="card-body">
-            <form action="{{ route('assuntos.index') }}" method="GET" class="mb-4">
+        <form action="{{ route('assuntos.index') }}" method="GET" class="mb-4">
                 <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Buscar por descrição" value="{{ request('search') }}">
-                    <button class="btn btn-outline-secondary" type="submit">
-                        <i class="bi bi-search"></i> Buscar
-                    </button>
+                    <input type="text" name="search" class="form-control" placeholder="Buscar Assunto..." value="{{ request('search') }}">
+                    <button class="btn btn-outline-secondary" type="submit">Buscar</button>
                 </div>
             </form>
 
@@ -34,7 +32,7 @@
                     </div>
                 @endif
             @else
-                <table class="table table-striped">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th style="width: 85%;">Descrição</th>
@@ -83,4 +81,5 @@
         </div>
     </div>
 </div>
+
 @endsection

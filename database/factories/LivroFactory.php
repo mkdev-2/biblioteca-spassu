@@ -16,7 +16,8 @@ class LivroFactory extends Factory
             'Editora' => $this->faker->company,
             'Edicao' => $this->faker->numberBetween(1, 10),
             'AnoPublicacao' => $this->faker->year,
-            'Valor' => $this->faker->randomFloat(2, 10, 100),
+            'Valor' => round($this->faker->randomFloat(2, 10, 100), 2),
+
         ];
     }
 }

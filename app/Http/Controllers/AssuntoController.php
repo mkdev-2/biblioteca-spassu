@@ -9,10 +9,13 @@ use Illuminate\Database\QueryException;
 
 class AssuntoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $assuntos = Assunto::simplePaginate(10);
-        return view('assuntos.index', compact('assuntos'));
+        $search = $request->input('search');
+        $assuntos = Assunto::when($search, function ($query, $search) {
+            return $query->where('Descricao', 'like', '%' . $search . '%');
+        })->simplePaginate(10);
+        return view('assuntos.index', compact('assuntos', 'search'));
     }
 
     public function create()
@@ -20,11 +23,15 @@ class AssuntoController extends Controller
         return view('assuntos.form');
     }
 
-    public function store(AssuntoRequest $request)
+    public function show($Assunto)
     {
-        $this->validateAssunto($request);
+        $assunto = Assunto::findOrFail($Assunto['CodAs']);
+        return view('assuntos.show', compact('assunto'));
+    }
 
-        Assunto::create($request->all());
+    public function store(AssuntoRequest $request, Assunto $assunto)
+    {
+        $assunto->create($request->validated());
         return redirect()->route('assuntos.index')->with('success', 'Assunto criado com sucesso.');
     }
 
@@ -35,26 +42,19 @@ class AssuntoController extends Controller
     
     public function update(AssuntoRequest $request, Assunto $assunto)
     {
-        $this->validateAssunto($request);
-
-        $assunto->update($request->all());
+        $assunto->update($request->validated());
         return redirect()->route('assuntos.index')->with('success', 'Assunto atualizado com sucesso.');
     }
 
     public function destroy(Assunto $assunto)
     {
-        try {
-            $assunto->delete();
-            return response()->json(['success' => true]);
-        } catch (\Exception $e) {
-            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+        if ($assunto->livros()->exists()) {
+            return redirect()->route('assuntos.index')->with('error', 'Não é possível excluir um assunto vinculado a um ou mais livros.');
         }
+        $assunto->delete();
+        
+        return redirect()->route('assuntos.index')
+            ->with('success', 'Assunto excluído com sucesso!');
     }
 
-    private function validateAssunto(Request $request)
-    {
-        $request->validate([
-            'Descricao' => 'required|max:20'
-        ]);
-    }
 }

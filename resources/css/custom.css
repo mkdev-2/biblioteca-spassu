@@ -1,27 +1,23 @@
-/* Cores personalizadas baseadas na Spassu */
 :root {
-    --primary-color: #0054A6; /* Azul principal */
-    --secondary-color: #F48221; /* Laranja */
-    --accent-color: #17A2B8; /* Azul claro (informação) */
-    --text-color: #4A4A4A; /* Cinza escuro */
-    --muted-color: #F5F5F5; /* Fundo neutro */
-    --background-color: #FFFFFF; /* Fundo branco */
-    --border-color: #DEE2E6; /* Cor de borda neutra */
+    --primary-color: #0054A6; 
+    --secondary-color: #F48221; 
+    --accent-color: #17A2B8; 
+    --text-color: #4A4A4A;
+    --muted-color: #F5F5F5; 
+    --background-color: #FFFFFF;
+    --border-color: #DEE2E6;
 }
 
-/* Fonte personalizada e ajustes tipográficos */
 body {
     font-family: 'Open Sans', sans-serif;
     color: var(--text-color);
     background-color: var(--background-color);
 }
 
-/* Contêiner */
 .container {
     max-width: 900px;
 }
 
-/* Navbar personalizada */
 .navbar {
     background-color: var(--primary-color);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -40,7 +36,6 @@ body {
     font-size: 1.5rem;
 }
 
-/* Estilo de botões */
 .btn, .btn-primary, .btn-success, .btn-warning, .btn-danger {
     border-radius: 8px;
     font-weight: 600;
@@ -76,7 +71,6 @@ body {
     border-color: #d96e1c;
 }
 
-/* Estilo para formulário */
 .form-label {
     font-weight: 600;
     color: var(--primary-color);
@@ -95,7 +89,6 @@ body {
     box-shadow: 0 0 5px rgba(244, 130, 33, 0.5);
 }
 
-/* Estilos dos Cards */
 .card {
     border-radius: 10px;
     border: 1px solid var(--border-color);
@@ -130,7 +123,6 @@ body {
     color: var(--primary-color);
 }
 
-/* Ícones */
 .card .icon i, i.bi {
     font-size: 1.5rem;
     color: var(--muted-color);
@@ -141,7 +133,6 @@ i.bi:hover {
     color: var(--secondary-color);
 }
 
-/* Links */
 a {
     color: var(--primary-color);
     text-decoration: none;
@@ -152,13 +143,11 @@ a:hover {
     color: var(--secondary-color);
 }
 
-/* Alertas estilizados */
 .alert {
     border-radius: 6px;
     font-weight: 500;
 }
 
-/* Ajustes de espaçamento */
 .mt-3 {
     margin-top: 1.5rem;
 }
@@ -167,7 +156,6 @@ a:hover {
     margin-bottom: 1.5rem;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
     .navbar-brand {
         font-size: 1.25rem;
@@ -177,12 +165,9 @@ a:hover {
     }
 }
 
-/* Sombra leve para os cards */
 .card-shadow {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
-
-/* Estilo para os toasts */
 .toast-container .toast {
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);

@@ -15,12 +15,18 @@ return new class extends Migration
     {
         Schema::create('livro_assunto', function (Blueprint $table) {
             $table->id();  
-            $table->foreignId('Livro_CodLi')->references('CodLi')->on('livros')->onDelete('cascade');
-            $table->foreignId('Assunto_codAs')->references('CodAs')->on('assuntos')->onDelete('cascade');
+
+            // Adicione as colunas antes de definir as chaves estrangeiras
+            $table->unsignedBigInteger('Livro_CodLi');
+            $table->unsignedBigInteger('Assunto_CodAs');
+
+            // Definir as chaves estrangeiras
+            $table->foreign('Livro_CodLi')->references('CodLi')->on('livros')->onDelete('cascade');
+            $table->foreign('Assunto_CodAs')->references('CodAs')->on('assuntos')->onDelete('cascade');
+
             $table->timestamps();
             $table->softDeletes();
         });
-        
     }
 
     /**

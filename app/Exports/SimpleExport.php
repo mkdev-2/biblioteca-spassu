@@ -26,13 +26,13 @@ class SimpleExport implements FromCollection, WithHeadings, WithMapping
         
         if ($this->data->isNotEmpty()) {
             $firstItem = $this->data->first();
-            if (!empty($firstItem->autor)) $headings[] = 'Autor';
-            if (!empty($firstItem->titulo)) $headings[] = 'Título';
-            if (!empty($firstItem->editora)) $headings[] = 'Editora';
-            if (!empty($firstItem->edicao)) $headings[] = 'Edição';
-            if (!empty($firstItem->ano_publicacao)) $headings[] = 'Ano de Publicação';
-            if (!empty($firstItem->valor)) $headings[] = 'Valor';
-            if (!empty($firstItem->assuntos)) $headings[] = 'Assunto';
+            if (!empty($firstItem->Nome)) $headings[] = 'Autor';
+            if (!empty($firstItem->Titulo)) $headings[] = 'Título';
+            if (!empty($firstItem->Editora)) $headings[] = 'Editora';
+            if (!empty($firstItem->Edicao)) $headings[] = 'Edição';
+            if (!empty($firstItem->AnoPublicacao)) $headings[] = 'Ano de Publicação';
+            if (!empty($firstItem->Valor)) $headings[] = 'Valor';
+            if (!empty($firstItem->Assuntos)) $headings[] = 'Assunto';
         }
 
         return $headings;
@@ -42,13 +42,13 @@ class SimpleExport implements FromCollection, WithHeadings, WithMapping
     {
         $row = [];
         
-        if (!empty($livro->autor)) $row[] = $livro->autor;
-        if (!empty($livro->titulo)) $row[] = $livro->titulo;
-        if (!empty($livro->editora)) $row[] = $livro->editora;
-        if (!empty($livro->edicao)) $row[] = $livro->edicao;
-        if (!empty($livro->ano_publicacao)) $row[] = $livro->ano_publicacao;
-        if (!empty($livro->valor)) $row[] = 'R$ ' . number_format($livro->valor, 2, ',', '.');
-        if (!empty($livro->assuntos)) $row[] = $livro->assuntos;
+        if (!empty($livro->Nome)) $row[] = $livro->Nome;
+        if (!empty($livro->Titulo)) $row[] = $livro->Titulo;
+        if (!empty($livro->Editora)) $row[] = $livro->Editora;
+        if (!empty($livro->Edicao)) $row[] = $livro->Edicao;
+        if (!empty($livro->AnoPublicacao)) $row[] = $livro->AnoPublicacao;
+        if (!empty($livro->Valor)) $row[] = 'R$ ' . number_format($livro->Valor, 2, ',', '.');
+        if (!empty($livro->Assuntos)) $row[] = $livro->Assuntos;
 
         return $row;
     }
