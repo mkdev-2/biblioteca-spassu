@@ -46,6 +46,13 @@ jobs:
         run: |
           dockerize -wait tcp://localhost:3306 -timeout 3m
 
+
+      - name: Create .env file
+        run: cp .env.example .env
+      
+      - name: Create .env.testing file
+        run: cp .env.example .env.testing
+        
       - name: Create databases
         run: php artisan db:create
 
@@ -57,9 +64,6 @@ jobs:
 
       - name: Seed database (optional)
         run: php artisan db:seed --force
-
-      - name: Create .env file
-        run: cp .env.example .env
 
       - name: Generate application key
         run: php artisan key:generate --ansi
